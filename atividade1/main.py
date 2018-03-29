@@ -8,6 +8,8 @@ from questao2 import *
 from questao3 import *
 from questao4 import *
 from questao5 import *
+from questao6 import *
+from questao7 import *
 
 def main():
 	# ler imagem.
@@ -15,15 +17,22 @@ def main():
 	img = cv2.imread(config.imageToRead)
 	# img = cv2.cvtColor(cv2.imread(config.imageToRead),  cv2.COLOR_BGR2RGB)
 	
-	# imageResult = questao1(img)
-	# imageResult = questao2(img, 'green')
-	# imageResult = questao3(img)
-	# imageResult = questao4(img, 100)
-	# imageResult = questao6(img,500)
-	imageResult = questao7(img)
+	imageResult1 = questao1(img)
+	imageResult2 = questao2(img, 'green')
+	imageResult3 = questao3(img)
+	imageResult4 = questao4(img, 100)
+	imageResult5 = questao5(img, 2)
+	imageResult6_a = questao6_a(img,500)
+	imageResult6_b = questao6_b(img)
 
 	# salvar arquivo transformado
-	cv2.imwrite('newImage1.png',imageResult)
+	cv2.imwrite('imageResult1.png',imageResult1)
+	cv2.imwrite('imageResult2.png',imageResult2)
+	cv2.imwrite('imageResult3.png',imageResult3)
+	cv2.imwrite('imageResult4.png',imageResult4)
+	cv2.imwrite('imageResult5.png',imageResult5)
+	cv2.imwrite('imageResult6_a.png',imageResult6_a)
+	cv2.imwrite('imageResult6_b.png',imageResult6_b)
 
 def questao1(originalImage):
 
@@ -120,12 +129,13 @@ def questao5(originalImage, brightness):
 
 	return imageResult
 
-def questao6(img, n):
+def questao6_a(img, n):
 	'''
 	calcula o limiar com determina N
 	Parametros:
 		img: Imagem a ser modificada
-		n :  e' o tamanho da mask	'''
+		n :  e' o tamanho da mask	
+	'''
 	imageResult = None
 	height = len(img)
  	width = len(img[0])
@@ -140,7 +150,7 @@ def questao6(img, n):
 
 	return convertArrayToNumpy(newImage)
 
-def questao7(img):
+def questao6_b(img):
 	'''
 	calcula o limiar pela media dos valores da imagem
 	Parametros:
@@ -174,59 +184,6 @@ def questao7(img):
 
 	return convertArrayToNumpy(newImage)
 
-
-
-def limiarMedia(b,g,r,limiarR,limiarG,limiarB):
-
-    '''
-	limiar e' igual media de valores da banda
-	
-	Parametros:
-		b: valor do azul
-		g: valor do verde
-		r: valor do vergmelho
-		limiarR: media dos valores vermelhos
-		limiarG: media dos valores verdes
-		limiarB: media dos valores azul
-    '''
-    
-    if r < limiarR:
-		r = 0
-    else:
-		r = 255
-    if g < limiarG:
-		g = 0
-    else:
-		g = 255
-    if b < limiarR:
-		b = 0
-    else:
-		b = 255
-            
-		return [trunc(b),trunc(g),trunc(r)]
-
-def limiar(b,g,r,n):
-    '''
-    Multiplica o brilho de uma imagem de acordo com o valor brightness dado
-
-	Parametros:
-		parameters : Dicionario {'brightness': int}
-    '''
-    
-    if r < n:
-		r = 0
-    else:
-		r = 255
-    if g < n:
-		g = 0
-    else:
-		g = 255
-    if b < n:
-		b = 0
-    else:
-		b = 255
-            
-		return [trunc(b),trunc(g),trunc(r)]
 def convertArrayToNumpy(array):
 	'''	
 	Coloca um array em forma de numpy_array pq eh o tipo de objeto que o openCV usa
