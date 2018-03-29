@@ -18,8 +18,10 @@ def main():
 	# imageResult = questao1(img)
 	# imageResult = questao2(img, 'green')
 	# imageResult = questao3(img)
+	# imageResult = questao5(img, 2)
 	# imageResult = questao4(img, 100)
 	# imageResult = questao6(img,500)
+	
 	imageResult = questao7(img)
 
 	# salvar arquivo transformado
@@ -174,8 +176,6 @@ def questao7(img):
 
 	return convertArrayToNumpy(newImage)
 
-
-
 def limiarMedia(b,g,r,limiarR,limiarG,limiarB):
 
     '''
@@ -227,6 +227,7 @@ def limiar(b,g,r,n):
 		b = 255
             
 		return [trunc(b),trunc(g),trunc(r)]
+
 def convertArrayToNumpy(array):
 	'''	
 	Coloca um array em forma de numpy_array pq eh o tipo de objeto que o openCV usa
