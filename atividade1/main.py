@@ -22,7 +22,7 @@ def main():
 	imageResult3 = questao3(img)
 	imageResult4 = questao4(img, 100)
 	imageResult5 = questao5(img, 2)
-	imageResult6_a = questao6_a(img,500)
+	imageResult6_a = questao6_a(img,100)
 	imageResult6_b = questao6_b(img)
 
 	# salvar arquivo transformado
@@ -184,6 +184,53 @@ def questao6_b(img):
 
 	return convertArrayToNumpy(newImage)
 
+def questao7_media(img, ordem):
+	'''
+	Aplica o filtro de media na ordem escolhida pelo usuario
+	'''
+	pass
+
+def questao7_mediana(img, ordem):
+	'''
+	APlica o filtro de mediana na ordem escolhida pelo usuario
+	'''
+	pass
+
+def questao8_sobel(img):
+	'''
+	Filtro de deteccao de bordas Sobel
+	'''
+	pass
+
+def questao8_laplaciano(img):
+	'''
+	Filtro de deteccao de bordas laplaciano
+	'''
+	pass
+
+def questao9_a(img):
+	'''
+	aplicar o filtro
+	  0  -1	   0
+		+	+
+	 -1	  5   -1
+		+	+
+	  0	  -1   0
+
+	'''
+	pass
+
+def questao9_b(img):
+	'''
+	aplicar o filtro
+ 	  0   0	   0
+		+	+
+	  0	  1    0
+		+	+
+	  0	   0   -1
+	'''
+	pass
+
 def convertArrayToNumpy(array):
 	'''	
 	Coloca um array em forma de numpy_array pq eh o tipo de objeto que o openCV usa
@@ -225,6 +272,12 @@ def applyToAllPixels(img, action):
 				newImage[-1].append(fun(img[h][w][0], img[h][w][1],  img[h][w][2]))
 
 	return convertArrayToNumpy(newImage)
+
+def applyFilter(img, filer):
+	'''
+	Aplica um filtro a toda uma imagem
+	'''
+	pass
 
 if __name__ == '__main__':
 	main()
