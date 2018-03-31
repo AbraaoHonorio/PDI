@@ -134,7 +134,7 @@ def mediana(vector):
 	middle= n/2
 
 	if n %2==0:
-		mediana=(vectorOrder[middle+1] + vectorOrder[middle+2]) / 2
+		mediana=(int(vectorOrder[middle+1]) + int(vectorOrder[middle+2])) / 2
 	else:
 		mediana=vectorOrder[middle+1]*1
 
@@ -146,15 +146,14 @@ def questao7B(img, n):
  	width=len(img[0])
 	
 	nn = n/2
- 	# Usar metodo pixel a pixel
  	newImage=[]
 	
  	for i in range(1,height-1):
  		newImage.append([])
  		for j in range(1,width-1):
-			medianaR = [0] * n
-			medianaG = [0] * n
-			medianaB = [0] * n
+			medianaR = [0] * n * n
+			medianaG = [0] * n * n
+			medianaB = [0] * n * n
 			k = -1
 			for h in range(i-nn, i+nn):
 				for w in range(j-nn, j+nn):
@@ -362,4 +361,3 @@ def applyToAllPixels(img, action):
 
 if __name__ == '__main__':
 	main()
-
