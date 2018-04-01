@@ -1,4 +1,18 @@
 from math import trunc
+from util import *
+
+
+def questao1(originalImage):
+
+	# Converter todos os pixels para YIQ
+	# img2 = convertAllBGRtoYIQ(img)
+	img2 = applyToAllPixels(originalImage, {'fun': BGRtoYIQ})
+
+	# Converter todos os pixels para RGB
+	# img3 =  convertAllYIQtoBGR(img2)
+	img3 = applyToAllPixels(img2, {'fun': YIQtoBGR})
+
+	return img3
 
 def BGRtoYIQ(b,g,r):
 	y = 0.299*r + 0.587*g + 0.114*b

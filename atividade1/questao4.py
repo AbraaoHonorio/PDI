@@ -1,3 +1,22 @@
+from util import *
+
+def questao4(originalImage, brightness):
+	'''
+	Adiciona brilho a uma imagem
+
+	Parametros:
+		originalImage: Imagem a ser modificada
+		brightness : Variavel a ser somada as cores RGB do pixel
+	'''
+
+	imageResult = None
+
+	imageResult = applyToAllPixels(
+	    originalImage, {'fun': addBrightness, 'parameters': {'brightness': brightness}})
+
+	return imageResult
+
+
 def addBrightness(b,g,r,parameters):
 	'''
 	Adiciona brilho a uma imagem de acordo com o valor brightness dado

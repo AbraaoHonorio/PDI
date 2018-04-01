@@ -1,3 +1,23 @@
+from util import *
+
+
+def questao5(originalImage, brightness):
+	'''
+	MUltiplica o brilho de uma imagem
+
+	Parametros:
+		originalImage: Imagem a ser modificada
+		brightness : Variavel a ser multiplicada as cores RGB do pixel
+	'''
+
+	imageResult = None
+
+	imageResult = applyToAllPixels(
+	    originalImage, {'fun': mulBrightness, 'parameters': {'brightness': brightness}})
+
+	return imageResult
+
+	
 def mulBrightness(b,g,r,parameters):
 	'''
 	Multiplica o brilho de uma imagem de acordo com o valor brightness dado

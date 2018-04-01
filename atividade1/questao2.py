@@ -1,4 +1,36 @@
 from numpy import mean
+from util import *
+
+def questao2(originalImage, color='gray'):
+	'''
+	Coloca a imagem em modo monocromatico
+
+	Parametros:
+		originalImage: ----
+		color: string que siginfica a banda escolhida:
+			gray: --- (default)
+			red: ---
+			green:---
+			blue: ---
+	'''
+
+	imageResult = None
+
+	if (color == 'gray'):
+		# media dos  valores de cada pixel
+		imageResult = applyToAllPixels(originalImage, {'fun': calculateMeanAndAplly})
+
+	# para cores primarias basta remover os outros valores
+	elif (color == 'red'):
+		imageResult = applyToAllPixels(originalImage, {'fun': toRed})
+	elif (color == 'blue'):
+		imageResult = applyToAllPixels(originalImage, {'fun': toBlue})
+	elif (color == 'green'):
+		imageResult = applyToAllPixels(originalImage, {'fun': toGreen})
+	else:
+		print("cor invalida")
+
+	return imageResult
 
 def calculateMeanAndAplly(b,g,r):
     '''
