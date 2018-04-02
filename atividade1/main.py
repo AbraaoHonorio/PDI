@@ -29,6 +29,7 @@ def main():
 	imageResult7_a = questao7(img, 3)
 	imageResult7_b = questao7B(img, 3)
 
+
 	# salvar arquivo transformado
 	cv2.imwrite('imageResult1.png',imageResult1)
 	cv2.imwrite('imageResult2.png',imageResult2)
@@ -42,4 +43,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
