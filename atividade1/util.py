@@ -54,6 +54,8 @@ def applyFilter(img, filter):
 	Aplica um filtro a toda uma imagem
 	Parametros:
 		filter: deve ser uma matrix nXn
+
+	@Deprecated
 	'''
 
 	# identifica o n do filtro (ex: 3x3)
@@ -72,7 +74,7 @@ def applyFilter(img, filter):
 		topBorder+=(img[0])
 
 
-	
+
 	# Usar metodo pixel a pixel
 	newImage=[]
 	for i in range(height):
@@ -94,3 +96,134 @@ def applyFilter(img, filter):
 	return convertArrayToNumpy(newImage)
 	
 	pass
+
+def applyFilter3x3(img, kernel):
+	'''
+	Aplica um filtro 3x3 a toda uma imagem
+	Parametros:
+		kernel: deve ser uma matrix numpy 3x3
+	'''
+	
+	height=len(img)
+	width=len(img[0])
+
+	
+	# i e j sao a posicao do elemento na matriz
+	for i in range(height):
+		for j in range(width):
+			neighborhood = __buildNeighborhood(img,i,j)
+				
+			# Multiplicacao de matriz
+			img[i][j] = somaElementosMatriz(multiplicaMatrix(neighborhood, kernel))
+
+	return convertArrayToNumpy(img)
+	
+	
+def __buildNeighborhood(img,i,j):
+	'''
+	Constroi uma matriz de vizinhos que eh aquela que vai ser multiplicada pelo kernel
+
+	Parametros:
+		img:
+		i: linha do pixel na imagem
+		j: coluna do pixel na imagem
+	'''
+	height = len(img)
+	width = len(img[0])
+
+	# matriz que vai ser multiplicada pelo kernel
+	neighborhood = np.empty((3, 3, 3), dtype=int)
+
+	
+	# elemento central (ele mesmo)
+	neighborhood[1][1] = img[i][j]
+
+	# tratando as bordas
+	if i == 0:
+		# borda superior
+		neighborhood[0][1] = img[i][j]
+		neighborhood[2][1] = img[i+1][j]
+
+	elif i == height-1:
+		# borda inferor
+		neighborhood[0][1] = img[i-1][j]
+		neighborhood[2][1] = img[i][j]
+
+	else:
+		neighborhood[0][1] = img[i-1][j]
+		neighborhood[2][1] = img[i+1][j]
+
+	if j == 0:
+		# borda esquerda
+		neighborhood[1][0] = img[i][j]
+		neighborhood[1][2] = img[i][j+1]
+
+	elif j == width-1:
+		# Borda direita
+		neighborhood[1][2] = img[i][j]
+		neighborhood[1][0] = img[i][j-1]
+
+	else:
+		neighborhood[1][0] = img[i][j-1]
+		neighborhood[1][2] = img[i][j+1]
+
+	# trantando as bordas na extremidade (diagonais)
+	# borda cima-esquerda
+	if (i, j) == (0, 0):
+		neighborhood[0][0] = img[i][j]
+	# else:
+		# outras 3 bordas
+		neighborhood[2][0] = img[i+1][j]
+		neighborhood[2][2] = img[i+1][j+1]
+		neighborhood[0][2] = img[i][j+1]
+
+	# borda baixo-esquerda
+	if (i, j) == (height-1, 0):
+		neighborhood[2][0] = img[i][j]
+	# else:
+		# outras 3 bordas
+		neighborhood[0][0] = img[i-1][j]
+		neighborhood[2][2] = img[i][j+1]
+		neighborhood[0][2] = img[i-1][j+1]
+
+
+	# borda baixo-direita
+	if (i, j) == (height-1, width-1):
+		neighborhood[2][2] = img[i][j]
+	# else:
+		# outras 3 bordas
+		neighborhood[0][2] = img[i-1][j]
+		neighborhood[0][0] = img[i-1][j-1]
+		neighborhood[2][0] = img[i][j-1]
+
+	# borda cima-direita
+	if (i, j) == (0, width-1):
+		neighborhood[0][2] = img[i][j]
+	# else:
+		# outras 3 bordas
+		neighborhood[0][0] = img[i][j-1]
+		neighborhood[2][0] = img[i+1][j-1]
+		neighborhood[2][2] = img[i+1][j]
+	
+	
+	return neighborhood
+
+def multiplicaMatrix(matrix1, matrix2):
+	'''
+	Parametros:
+		duas matrizes do tipo numpy
+	'''
+
+	return matrix1.dot(matrix2)
+
+def somaElementosMatriz(matriz):
+	somaR = 0
+	somaG = 0
+	somaB = 0	
+	for i in range(len(matriz)):
+		for j in range(len(matriz[0])):
+			somaB += matriz[i][j][0]
+			somaG += matriz[i][j][1]
+			somaR += matriz[i][j][2]
+	
+	return [somaB, somaG, somaR]

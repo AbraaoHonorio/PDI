@@ -10,6 +10,8 @@ from questao4 import *
 from questao5 import *
 from questao6 import *
 from questao7 import *
+from questao8 import *
+from questao9 import *
 
 
 def main():
@@ -30,6 +32,9 @@ def main():
 	imageResult7_b = questao7B(img, 3)
 
 
+	imageResult9_a = questao9A(img)
+
+
 	# salvar arquivo transformado
 	cv2.imwrite('imageResult1.png',imageResult1)
 	cv2.imwrite('imageResult2.png',imageResult2)
@@ -40,6 +45,10 @@ def main():
 	cv2.imwrite('imageResult6_b.png',imageResult6_b)
 	cv2.imwrite('imageResult7_a.png',imageResult7_a)
 	cv2.imwrite('imageResult7_b.png',imageResult7_b)
+	
+	cv2.imwrite('imageResult9_a.png', imageResult9_a)
+
+
 
 if __name__ == '__main__':
 	main()
