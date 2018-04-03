@@ -1,6 +1,5 @@
 from math import trunc
 import numpy as np
-import pdb
 
 def ArrayToimage(r, g, b):
 
@@ -94,8 +93,6 @@ def applyFilter(img, filter):
 
 
 	return convertArrayToNumpy(newImage)
-	
-	pass
 
 def applyFilter3x3(img, kernel):
 	'''
@@ -117,7 +114,6 @@ def applyFilter3x3(img, kernel):
 			img[i][j] = somaElementosMatriz(multiplicaMatrix(neighborhood, kernel))
 
 	return convertArrayToNumpy(img)
-	
 	
 def __buildNeighborhood(img,i,j):
 	'''
@@ -167,7 +163,7 @@ def __buildNeighborhood(img,i,j):
 		neighborhood[1][0] = img[i][j-1]
 		neighborhood[1][2] = img[i][j+1]
 
-	# trantando as bordas na extremidade (diagonais)
+	# trantando as bordas na extremidade (diagonais) ==================================================
 	# borda cima-esquerda
 	if (i, j) == (0, 0):
 		neighborhood[0][0] = img[i][j]
@@ -176,6 +172,7 @@ def __buildNeighborhood(img,i,j):
 		neighborhood[2][0] = img[i+1][j]
 		neighborhood[2][2] = img[i+1][j+1]
 		neighborhood[0][2] = img[i][j+1]
+		print("pixel de borda cima-esquerda")
 
 	# borda baixo-esquerda
 	if (i, j) == (height-1, 0):
@@ -185,6 +182,7 @@ def __buildNeighborhood(img,i,j):
 		neighborhood[0][0] = img[i-1][j]
 		neighborhood[2][2] = img[i][j+1]
 		neighborhood[0][2] = img[i-1][j+1]
+		print("pixel de borda baixo-esquerda")
 
 
 	# borda baixo-direita
@@ -195,6 +193,7 @@ def __buildNeighborhood(img,i,j):
 		neighborhood[0][2] = img[i-1][j]
 		neighborhood[0][0] = img[i-1][j-1]
 		neighborhood[2][0] = img[i][j-1]
+		print("pixel de borda baixo-direita")
 
 	# borda cima-direita
 	if (i, j) == (0, width-1):
@@ -204,6 +203,7 @@ def __buildNeighborhood(img,i,j):
 		neighborhood[0][0] = img[i][j-1]
 		neighborhood[2][0] = img[i+1][j-1]
 		neighborhood[2][2] = img[i+1][j]
+		print("pixel de borda cima-direita")
 	
 	
 	return neighborhood

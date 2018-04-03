@@ -27,6 +27,6 @@ def questao9B(img):
 		+	+
 	  0	   0   -1
 	'''
+	kernel = np.array(([0, 0, 0], [0, 1, 0], [0, 0, -1]))
+	return applyFilter3x3(img, kernel)
 
-	applyFilter(img, [[],[],[]])
-	pass

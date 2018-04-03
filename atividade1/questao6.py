@@ -2,7 +2,7 @@ from util import *
 from math import trunc
 from questao1 import *
 
-def questao6B(img, n):
+def questao6A(img, n):
 	'''
 	calcula o limiar aplicado a banda y de uma imagem com m setado pelo usuario
 	Parametros:
@@ -42,14 +42,13 @@ def limiar(y,n):
 	else:
 		return 0
 
-
-def questao6(img):
+def questao6B(img):
 	'''
 	calcula o limiar pela media dos valores da imagem
 	Parametros:
 		img: Imagem a ser modificada
 	'''
-# Converte a imagem em YIQ
+	# Converte a imagem em YIQ
 	img2 = applyToAllPixels(img, {'fun': BGRtoYIQ})
 
 	height=len(img2)
@@ -68,8 +67,6 @@ def questao6(img):
 
 
 	limiarY= y / count
-	limiarI= i / count
-	limiarQ= q / count
 
 	newImage=[]
 	for h in range(height):
@@ -79,7 +76,10 @@ def questao6(img):
 									img2[h][w][1],
 									img2[h][w][2]])
 
-	return convertArrayToNumpy(newImage)
+	# Converte YIQ para RGB
+	img3 = applyToAllPixels(newImage, {'fun': YIQtoBGR})
+
+	return img3
 
 def questao6BemRGB(img, n):
 	'''
@@ -124,6 +124,7 @@ def limiarRGB(b,g,r,n):
 		b = 255
 		
 	return [trunc(b),trunc(g),trunc(r)]
+
 def limiarMedia(b,g,r,limiarR,limiarG,limiarB):
 
 	'''
