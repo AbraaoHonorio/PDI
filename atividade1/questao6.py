@@ -1,5 +1,6 @@
 from util import *
 from math import trunc
+from questao1 import *
 
 def questao6(img):
 	'''
@@ -38,47 +39,43 @@ def questao6(img):
 
 def questao6B(img, n):
 	'''
-	calcula o limiar com determina N
+	calcula o limiar aplicado a banda y de uma imagem com m setado pelo usuario
 	Parametros:
 		img: Imagem a ser modificada
-		n :  e' o tamanho da mask	
+		n: parametro setado pelo usuario	
 	'''
+
+	# Converte a imagem em YIQ
+	img2 = applyToAllPixels(img, {'fun': BGRtoYIQ})
+
 	imageResult = None
-	height = len(img)
-	width = len(img[0])
+	height = len(img2)
+	width = len(img2[0])
  
 	# Usar metodo pixel a pixel
 	newImage=[]
 	for h in range(height):
 		newImage.append([])
 		for w in range(width):
-			newImage[-1].append(limiar(img[h][w][2], img[h][w][1], img[h][w][0], n))
+			newImage[-1].append([limiar(img2[h][w][0],n), # muda apenas Y
+									img2[h][w][1],
+									img2[h][w][2]])
+
+	# Converte YIQ para RGB
+	img3 = applyToAllPixels(img2, {'fun': YIQtoBGR})
 
 
-	return convertArrayToNumpy(newImage)
+	return img3
 
-def limiar(b,g,r,n):
+def limiar(y,n):
 	'''
-	Multiplica o brilho de uma imagem de acordo com o valor brightness dado
-
-	Parametros:
-		parameters : Dicionario {'brightness': int}
+	retorna a banda y maxima se o valor original eh maior que o parametro
+	ou retorn y minimo se a banda y e menor que o parametro
 	'''
-	
-	if r < n:
-		r = 0
+	if y > n:
+		return 1
 	else:
-		r = 255
-	if g < n:
-		g = 0
-	else:
-		g = 255
-	if b < n:
-		b = 0
-	else:
-		b = 255
-		
-	return [trunc(b),trunc(g),trunc(r)]
+		return 0
 
 def limiarMedia(b,g,r,limiarR,limiarG,limiarB):
 
