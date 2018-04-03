@@ -10,8 +10,6 @@ from questao4 import *
 from questao5 import *
 from questao6 import *
 from questao7 import *
-from questao8 import *
-from questao9 import *
 
 
 def main():
@@ -21,18 +19,15 @@ def main():
 	# img = cv2.cvtColor(cv2.imread(config.imageToRead),  cv2.COLOR_BGR2RGB)
 
 	# Chama cada questao de forma isolada
-	# imageResult1 = questao1(img)
-	# imageResult2 = questao2(img, 'green')
-	# imageResult3 = questao3(img)
-	# imageResult4 = questao4(img, 100)
-	# imageResult5 = questao5(img, 2)
-	# imageResult6_a = questao6(img)
-	imageResult6_b = questao6B(img, 0.5)
-	# imageResult7_a = questao7(img, 3)
-	# imageResult7_b = questao7B(img, 3)
-
-
-	imageResult9_a = questao9A(img)
+	imageResult1 = questao1(img)
+	imageResult2 = questao2(img, 'green')
+	imageResult3 = questao3(img)
+	imageResult4 = questao4(img, 100)
+	imageResult5 = questao5(img, 2)
+	imageResult6_a = questao6(img)
+	imageResult6_b = questao6B(img, 3)
+	imageResult7_a = questao7(img, 3)
+	imageResult7_b = questao7B(img, 3)
 
 
 	# salvar arquivo transformado
@@ -45,10 +40,6 @@ def main():
 	cv2.imwrite('imageResult6_b.png',imageResult6_b)
 	cv2.imwrite('imageResult7_a.png',imageResult7_a)
 	cv2.imwrite('imageResult7_b.png',imageResult7_b)
-	
-	cv2.imwrite('imageResult9_a.png', imageResult9_a)
-
-
 
 if __name__ == '__main__':
 	main()
