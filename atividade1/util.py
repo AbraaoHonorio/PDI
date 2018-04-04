@@ -294,4 +294,4 @@ def somaElementosMatriz(matriz):
 			somaG += matriz[i][j][1]
 			somaR += matriz[i][j][2]
 	
-	return [somaB, somaG, somaR]
+	return [trunc(somaB/9), trunc(somaG/9), trunc(somaR/9)]

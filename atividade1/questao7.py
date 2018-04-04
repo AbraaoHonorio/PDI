@@ -31,7 +31,7 @@ def questao7B(img, n):
 			colorR = mediana(medianaR)
 			colorG = mediana(medianaG)
 			colorB = mediana(medianaB)
-			newImage[-1].append(ArrayToimage(colorR,colorG, colorB))
+			newImage[-1].append(ArrayToimage(colorB,colorG, colorR))
 
 
 	return convertArrayToNumpy(newImage)
@@ -65,12 +65,15 @@ def questao7(img, n):
 						mediaR += img[h][w][0]
 						mediaG += img[h][w][1]
 						mediaB += img[h][w][2]
-			newImage[-1].append(ArrayToimage(mediaR/nn, mediaG/nn, mediaB/nn))
+			newImage[-1].append(ArrayToimage(mediaB/nn, mediaG/nn, mediaR/nn))
 
 
 	return convertArrayToNumpy(newImage)
 
-	
+def questao7A_v2(img):
+	kernel = np.array(([1/9,1/9,1/9],[1/9,1/9, 1/9],[ 1/9, 1/9, 1/9]))
+	applyFilter3x3(img, kernel)
+
 def mediana(vector):  
 	vectorOrder=sorted(vector)
     
