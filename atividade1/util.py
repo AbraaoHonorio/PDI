@@ -40,7 +40,7 @@ def convertArrayToNumpy(array):
 	'''
 	Coloca um array em forma de numpy_array pq eh o tipo de objeto que o openCV usa
 	'''
-	array_numPy=np.empty((len(array), len(array[0]), 3))
+	array_numPy=np.zeros((len(array), len(array[0]), 3))
 
 	for row in range(len(array)):
 		for colunm in range(len(array[row])):
@@ -108,14 +108,18 @@ def applyFilter3x3(img, kernel):
 	# i e j sao a posicao do elemento na matriz
 	for i in range(height):
 		for j in range(width):
-			neighborhood = __buildNeighborhood(img,i,j)
+			# Verificar se o pixel eh de fronteira
+			if (i > 0 and  i < height-1
+				and j > 0 and j < width-1):
 				
-			# Multiplicacao de matriz
-			img[i][j] = somaElementosMatriz(multiplicaMatrix(neighborhood, kernel))
+				neighborhood = __buildNeighborhood(img,i,j)
+				
+				# Multiplicacao de matriz
+				img[i][j] = somaElementosMatriz(multiplicaMatrix(neighborhood, kernel))
 
 	return convertArrayToNumpy(img)
 	
-def __buildNeighborhood(img,i,j):
+def __buildNeighborhood_old(img,i,j):
 	'''
 	Constroi uma matriz de vizinhos que eh aquela que vai ser multiplicada pelo kernel
 
@@ -123,12 +127,14 @@ def __buildNeighborhood(img,i,j):
 		img:
 		i: linha do pixel na imagem
 		j: coluna do pixel na imagem
+
+	@Depreciado
 	'''
 	height = len(img)
 	width = len(img[0])
 
 	# matriz que vai ser multiplicada pelo kernel
-	neighborhood = np.empty((3, 3, 3), dtype=int)
+	neighborhood = np.zeros((3, 3, 3), dtype=int)
 
 	
 	# elemento central (ele mesmo)
@@ -205,16 +211,78 @@ def __buildNeighborhood(img,i,j):
 		neighborhood[2][2] = img[i+1][j]
 		print("pixel de borda cima-direita")
 	
+	if ((i != 0) and (j != 0) and (i != height-1) and (j != width-1)):
+		neighborhood[0][0] = img[i-1][j-1]
+		neighborhood[2][0] = img[i+1][j-1]
+		neighborhood[0][2] = img[i-1][j+1]
+		neighborhood[2][2] = img[i+1][j+1]
 	
+	return neighborhood
+
+def __buildNeighborhood(img, i,j):
+	'''
+	Constroi uma matriz de vizinhos que eh aquela que vai ser multiplicada pelo kernel
+
+	IMPORTANTE!!:
+		Nao passe pixel de fronteira
+
+	Parametros:
+		img:
+		i: linha do pixel na imagem
+		j: coluna do pixel na imagem
+	'''
+	height = len(img)
+	width = len(img[0])
+
+	# matriz que vai ser multiplicada pelo kernel
+	neighborhood = np.zeros((3, 3, 3), dtype=int)
+
+	neighborhood[0][0] = img[i][j]
+	neighborhood[0][1] = img[i][j]
+	neighborhood[0][2] = img[i][j]
+
+	neighborhood[1][0] = img[i][j]
+	neighborhood[1][1] = img[i][j] # elemento central (ele mesmo)
+	neighborhood[1][2] = img[i][j]
+	
+	neighborhood[2][0] = img[i][j]
+	neighborhood[2][1] = img[i][j]
+	neighborhood[2][2] = img[i][j]
+
 	return neighborhood
 
 def multiplicaMatrix(matrix1, matrix2):
 	'''
 	Parametros:
 		duas matrizes do tipo numpy
+		matriz1: vizinhanca (neighborhood)
+		matriz2: matriz passada na questao
 	'''
 
-	return matrix1.dot(matrix2)
+	# quebrar a matriz1 em 3: uma pra R, uma pra G, outra pra B
+	matrizR = np.zeros((3,3))
+	matrizG = np.zeros((3,3))
+	matrizB = np.zeros((3,3))
+	for i in range(len(matrix1)):
+		for j in range(len(matrix1[0])):
+			matrizB[i][j] = matrix1[i][j][0]
+			matrizG[i][j] = matrix1[i][j][1]
+			matrizR[i][j] = matrix1[i][j][2]
+	
+	# agora multiplica cada uma dessas matrizes pela passada pela questao
+	auxB = matrizB.dot(matrix2)
+	auxG = matrizG.dot(matrix2)
+	auxR = matrizR.dot(matrix2)
+
+	# Juntar os resultados
+	result = np.zeros((3,3,3))
+	for i in range(len(matrix1)):
+		for j in range(len(matrix1[0])):
+			result[i][j][0] = auxB[i][j]
+			result[i][j][1] = auxG[i][j]
+			result[i][j][2] = auxR[i][j]
+
+	return result
 
 def somaElementosMatriz(matriz):
 	somaR = 0

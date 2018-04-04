@@ -9,7 +9,7 @@ from questao4 import *
 from questao5 import *
 from questao6 import *
 from questao7 import *
-
+from questao8 import *
 from questao9 import *
 
 
@@ -28,13 +28,15 @@ def main():
 	imageResult3 = questao3(img)
 	imageResult4 = questao4(img, 100)
 	imageResult5 = questao5(img, 2)
-	imageResult6_a = questao6A(img, 3)
+	imageResult6_a = questao6A(img, 140)
 	imageResult6_b = questao6B(img)
 	imageResult7_a = questao7(img, 3)
 	imageResult7_b = questao7B(img, 3)
-
-	# imageResult9_a = questao9A(img)
-	# imageResult9_b = questao9B(img)
+	# imageResult8_a = questao8_sobel(img)
+	imageResult9_a = questao9A(img)
+	imageResult9_b = questao9B(img)
+	# imageResult9_test_a = questao9ATest(img)
+	# imageResult9_test_b = questao9BTest(img)
 
 
 	# salvar arquivo transformado
@@ -50,9 +52,12 @@ def main():
 	cv2.imwrite('imageResult6_b.png',imageResult6_b)
 	cv2.imwrite('imageResult7_a.png',imageResult7_a)
 	cv2.imwrite('imageResult7_b.png',imageResult7_b)
+	# cv2.imwrite('imageResult8_a.png',imageResult8_a)
 
-	# cv2.imwrite('imageResult9_a.png',imageResult9_a)
-	# cv2.imwrite('imageResult9_b.png',imageResult9_b)
+	cv2.imwrite('imageResult9_a.png',imageResult9_a)
+	cv2.imwrite('imageResult9_b.png',imageResult9_b)
+	# cv2.imwrite('imageResult9_test_a.png',imageResult9_test_a)
+	# cv2.imwrite('imageResult9_test_b.png',imageResult9_test_b)
 
 if __name__ == '__main__':
 	main()
