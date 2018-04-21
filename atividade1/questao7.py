@@ -20,9 +20,9 @@ def questao7B(img, n):
 				for w in range(j-nn, j+nn):
 					k = k+1
 					if (h >= 0 and h < height and w >= 0 and w < width):
-						medianaR[k] = img[h][w][2]
+						medianaR[k] = img[h][w][0]
 						medianaG[k] = img[h][w][1]
-						medianaB[k] = img[h][w][0]
+						medianaB[k] = img[h][w][2]
 					else:
 						medianaR[k] = 0
 						medianaG[k] = 0

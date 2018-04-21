@@ -31,7 +31,7 @@ def main():
 	# imageResult6_a = questao6A(img, 140)
 	# imageResult6_b = questao6B(img)
 	# imageResult7_a = questao7(img, 15)
-	# imageResult7_b = questao7B(img, 3)
+	# imageResult7_b = questao7B(img, 15)
 	# imageResult8_a = questao8_sobel(img)
 	imageResult9_a = questao9A(img)
 	# imageResult9_b = questao9B(img)
