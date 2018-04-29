@@ -10,6 +10,7 @@ E, compare os resultados obtidos entre a) e b)
 import config
 import cv2
 import numpy as np
+from util import *
 
 def questao3_a1(img):
 	'''
@@ -73,13 +74,6 @@ def questao3_a1(img):
 
 	return BGR
 
-# Definicao de metodos
-def truncar(valor):
-	if(valor < 0.0):
-		return 0.0
-	elif(valor > 255.0):
-		return 255.0
-	return valor
 
 # Funcao massa de probabilidade
 def pmf(histograma, totalDePixels):
