@@ -135,7 +135,9 @@ def correlacao_comum(image, kernel):
 	pad = (kW - 1) / 2
 	image = cv2.copyMakeBorder(image, pad, pad, pad, pad,
 		cv2.BORDER_REPLICATE)
-	output = np.zeros((iH, iW), dtype="float32")
+	output = np.zeros((iH, iW,3), dtype="float32")
+	
+	
 
 	# loop over the input image, "sliding" the kernel across
 	# each (x, y)-coordinate from left-to-right and top to
@@ -160,9 +162,9 @@ def correlacao_comum(image, kernel):
 	# # rescale the output image to be in the range [0, 255]
 	for i in range(len(output)):
 		for j in range(len(output[i])):
-			output[i][j] = truncar(output[i][j])
+			grayLevel = truncar(output[i][j][0])
+			output[i][j] = np.array([grayLevel, grayLevel, grayLevel], dtype='uint8')
 	
-		
 
 
 	# output = rescale_intensity(output, in_range=(0, 255))
