@@ -3,17 +3,25 @@ from copy import deepcopy
 import cv2  # openCV
 # Importante!!! open CV usa modelo BGR e nao RGB
 import config
-from questao2 import *
-from questao3 import *
+#from questao2 import *
+#from questao3 import *
+from questao1 import *
 
 
 
 def main():
 	# Ler a imagem a ser processada
 	img = cv2.imread(config.imageToRead)
-	
+
+
+	# Questao 1:
+	resultImage1 = readFile('mascaras/sobelY',img, 'int')
+	cv2.imwrite('imagens/resultImage1.png', resultImage1)
+
+	'''
 	# ==> Executar as questoes uma a uma e salvar
 	# Questao 2
+
 	resultImage2_a1 = questao2_a1(deepcopy(img),1,1)
 	cv2.imwrite('imagens/resultImage2_a1.png', resultImage2_a1)
 	resultImage2_a2 = questao2_a2(deepcopy(img),1,1)
@@ -42,7 +50,7 @@ def main():
 	
 	resultImage3_b1 = questao3_b1(deepcopy(img))
 	cv2.imwrite('imagens/resultImage3_b1.png', resultImage3_b1)
-
+	'''
 
 
 if __name__ == '__main__':
