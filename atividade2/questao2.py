@@ -92,18 +92,22 @@ def questao2_c1(img):
 	Aplica um filtro especifico:
 	
 	'''
+	mask = [[0, 0, 0],
+			[0, 1, 0],
+			[0, 0, -1]]
 
-
-	pass
+	return correlacao_comum(img, mask)
 
 def questao2_c2(img):
 	'''
 	Aplica um filtro especifico:
 	
 	'''
+	mask = [[0, 0, -1],
+			[0, 1, 0],
+			[0, 0, 0]]
 
-
-	pass
+	return correlacao_comum(img, mask)
 
 def questao2_c3(img):
 	'''
@@ -111,8 +115,11 @@ def questao2_c3(img):
 	
 	'''
 
+	mask = [[0, 0, 2],
+        	[0, 1, 0],
+        	[-1, 0, 0]]
 
-	pass
+	return correlacao_comum(img, mask)
 
 def correlacao_comum(image, kernel):
 	'''
@@ -186,9 +193,6 @@ def correlacao_comum_old(img, mask):
 	# Recebe a imagem original apenas para ter as mesmas proporcoes
 	img_corr = img
 
-	# so a titulo de curiosidade: quantas devez o except eh chamado
-	debug_excexoes = 0
-
 	# Percorre cada pixel da imagem
 	for x in range(img.shape[0]):
 		for y in range(img.shape[1]):
@@ -218,10 +222,8 @@ def correlacao_comum_old(img, mask):
 
 			# Quando a coordenada não existir, passe para o próximo pixel
 			except:
-				debug_excexoes += 1
 				continue
 
-	print("debug_excexoes chamado", debug_excexoes, "vezes")
 
 	return img_corr
 
