@@ -8,6 +8,8 @@ Variaveis constantes para a atividade2
 # imageToRead = "imagens/resultImage3_a1.png" # imagem homogenea
 imageToRead = "imagens/pokemon-gray.png" # imagem homogenea
 
+# imageToRead = "imagens/original.jpg" # imagem homogenea
+
 
 # imagem colorida
 # imageToRead = "imagens/image3.jpeg"

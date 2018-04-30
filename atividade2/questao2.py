@@ -125,6 +125,7 @@ def correlacao_comum(image, kernel):
 	'''
 	Cria uma função para fazer a correlação simples, movendo a máscara sobre a imagem
 	Fonte: https://www.pyimagesearch.com/2016/07/25/convolutions-with-opencv-and-python/
+	Fonte: http: // www.rafaelzottesso.com.br/tag/python/
 	Parametros:
 		- img: imagem original
 		- mascara: mascara a ser correlacionada. Deve ser uma matriz 3x3
