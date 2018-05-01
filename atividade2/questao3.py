@@ -140,7 +140,7 @@ def questao3_b1(img):
 
 	for linha in range(0, img[:,:,0].__len__()) :       		# Linhas
 		for coluna in range(0, img[:,:,0][0].__len__()) :   # Colunas
-			aux = ((YIQ[linha,coluna,2] - irmin) / (irmax - irmin)) * (L - 1)
+			aux = (float(YIQ[linha,coluna,2] - irmin) / (irmax - irmin)) * (L - 1)
 			aux = truncar(aux)
 			aux = round(aux)
 			YIQ[linha,coluna,2] = aux
